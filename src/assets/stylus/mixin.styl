@@ -1,0 +1,79 @@
+$mainColor = #3E6397
+
+border-1px(color = #e0e0e0, isRelative = true, top = false, left = 0)
+  if isRelative
+    position relative
+  &:after
+    content " "
+    position absolute
+    left left
+    if !top
+      bottom 0
+    else
+      top 0
+    width 100%
+    height 1px
+    background-color color
+    transform scaleY(.5)
+border-none()
+  &:after
+    display none
+
+border-around(color = #e0e0e0, radius = 5px)
+  position relative
+  &:after 
+    content " "
+    width 200%
+    height 200%
+    position absolute
+    top 0
+    left 0
+    border 1px solid color
+    -webkit-transform scale(.5)
+    transform: scale(.5)
+    -webkit-transform-origin 0 0
+    transform-origin 0 0
+    box-sizing border-box
+    border-radius radius
+    
+text-els(value = 100%)
+  width value
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+  
+els-clamp(line = 2)
+  display -webkit-box
+  overflow hidden
+  text-overflow ellipsis
+  -webkit-line-clamp line
+  /* autoprefixer: off */
+  -webkit-box-orient vertical
+
+image-fit(isRelative = true, type = cover)
+  width 100%
+  height 100%
+  object-fit type
+  if isRelative
+    position relative
+  
+// banlv-before(size = 60px, color = #e0e0e0)
+//   font-family "iconfont"
+//   font-size size
+//   font-style normal
+//   -webkit-font-smoothing: antialiased
+//   -moz-osx-font-smoothing: grayscale
+//   content "\e6db"
+//   position absolute
+//   top 50%
+//   left 50%
+//   color color
+//   -webkit-transform translate(-50%, -50%)
+//   transform translate(-50%, -50%)
+  
+on-active(bg = true)
+  if bg
+    background #f1f1f1
+  else
+    filter brightness(.9)
+     

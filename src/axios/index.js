@@ -31,37 +31,39 @@ axios.interceptors.request.use(
 // http response 拦截器
 axios.interceptors.response.use(
   response => {
-    if (response.data.status === 410) {
-      // console.log('errMsg：用户未登陆或token已失效')
+    if (response.status === 410) {
       // 410 清除token信息并跳转到登录页面
       store.commit('logout')
-      // let redirectUrl = store.state.redirect || router.currentRoute.fullPath
-      // if (store.state.redirect) store.dispatch('setRedirect', null)
-      // router.push({
-      //   path: '/login',
-      //   query: {
-      //     redirect: redirectUrl
-      //   }
-      // })
+      let redirectUrl = router.currentRoute.fullPath
+      router.push({
+        path: '/login',
+        query: {
+          redirect: redirectUrl
+        }
+      })
+    } else if (response.status !== 200) {
+      return Promise.reject(response.data)
     } else {
       return response.data
     }
+    return Promise.reject(response.data)
   },
   throttle((error) => {
     if (typeof error.response !== 'undefined') {
       switch (error.response.status) {
         case 410:
-          // console.log('errMsg：用户未登陆或token已失效')
-          // 410 清除token信息并跳转到登录页面
+          // 清除token信息并跳转到登录页面
           store.commit('logout')
-          // let redirectUrl = store.state.redirect || router.currentRoute.fullPath
-          // if (store.state.redirect) store.dispatch('setRedirect', null)
-          // router.push({
-          //   path: '/login',
-          //   query: {
-          //     redirect: redirectUrl
-          //   }
-          // })
+          if (router.currentRoute.fullPath !== '/login') {
+            let redirectUrl = router.currentRoute.fullPath
+            router.push({
+              path: '/login',
+              query: {
+                redirect: redirectUrl
+              }
+            })
+          }
+          break
       }
     }
     try {
@@ -75,6 +77,7 @@ axios.interceptors.response.use(
         message: '请求失败，请检查网络是否畅通'
       })
     }
+
   }, 500)
 )
 

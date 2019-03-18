@@ -1,7 +1,8 @@
 const state = {
   userinfo: null,
   tokenid: null,
-  isIndex: false
+  isIndex: false,
+  scrollData: {}
 }
 
 export default state

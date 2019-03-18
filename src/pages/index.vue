@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div style="display: flex; height: 100%; justify-content: center; align-items: center">
-      <van-button type="primary">{{ message }}</van-button> 
+      <van-button type="primary" @click="getData">{{ message }}</van-button> 
     </div>
   </div>
 </template>
@@ -16,13 +16,17 @@
       }
     },
     mounted () {
-      console.log(api.host)
-      // axios method test
-      // this.$axios.get('/toolkit/region/listHotCity.do').then(data => {
-      //   console.log(data)
-      // })
-      // vuex test
-      // this.$store.commit('set_index', true)
+    },
+    methods: {
+      getData () {
+        // axios method test
+        this.$axios.get('/toolkit/region/listHotCity.do').then(data => {
+          console.log(api.host)
+          console.log(data)
+          // vuex test
+          // this.$store.commit('set_index', true)
+        })
+      }
     }
   }
 </script>

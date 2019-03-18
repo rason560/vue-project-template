@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import store from './store'
 import router from './router'
 import axios from './axios' 
+import browser from './assets/javascripts/browser'
 import { Button } from 'vant'
 import 'normalize.css'
 import './assets/stylus/theme.styl'
@@ -18,6 +19,7 @@ Object.keys(vantComponents).forEach(key => {
 
 Vue.prototype.$axios = axios
 Vue.prototype.$store = store
+Vue.prototype.$browser = browser
 
 Vue.config.productionTip = false
 

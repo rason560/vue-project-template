@@ -20,5 +20,11 @@ export default {
   },
   set_index (state, boolean) {
     state.isIndex = boolean
+  },
+  save_scrollData (state, { pageName, scrollTop}) {
+    state.scrollData[pageName] = { scrollTop: scrollTop }
+  },
+  delete_scrollData (state, pageName) {
+    delete state.scrollData[pageName]
   }
 }

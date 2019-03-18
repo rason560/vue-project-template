@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import store from '../store'
-// import router from '../router'
+import router from '../router'
 import throttle from 'lodash/throttle'
 import Vue from 'vue'
 import api from '../api'

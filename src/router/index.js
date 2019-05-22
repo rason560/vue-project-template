@@ -28,7 +28,6 @@ Router.beforeEach((to, from, next) => {
   } else if (store.state.tokenid) {
     next()
   } else {
-    console.log(next)
     next({
       path: '/login',
       replace: true,

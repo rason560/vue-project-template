@@ -2,7 +2,7 @@ import axios from 'axios'
 import qs from 'qs'
 import store from '../store'
 import router from '../router'
-import throttle from 'lodash/throttle'
+import debounce from 'lodash/debounce'
 import Vue from 'vue'
 import api from '../api'
 import { Toast } from 'vant'
@@ -19,8 +19,8 @@ axios.interceptors.request.use(
     if (config.method === 'post') {
       config.data = qs.stringify(config.data, {arrayFormat: 'brackets'})
     }
-    if (store.state.token) {
-      config.headers['Access-Token'] = `${store.state.token}`
+    if (store.state.tokenid) {
+      config.headers['Access-Token'] = `${store.state.tokenid}`
     }
     return config
   },
@@ -48,7 +48,7 @@ axios.interceptors.response.use(
     }
     return Promise.reject(response.data)
   },
-  throttle((error) => {
+  debounce((error) => {
     if (typeof error.response !== 'undefined') {
       switch (error.response.status) {
         case 410:
@@ -78,7 +78,7 @@ axios.interceptors.response.use(
       })
     }
 
-  }, 500)
+  }, 500, { 'leading': true, 'trailing': false })
 )
 
 const ajax = (method, url, params = {}, options) => {

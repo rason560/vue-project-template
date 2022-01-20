@@ -1,5 +1,5 @@
 # Introduction
-个人的vue 2.0开发初始模板
+个人的vue 2.0开发初始模板, 基于vue-cli 3
 
 1. 整合vant组件库
 2. 已封装axios方法
